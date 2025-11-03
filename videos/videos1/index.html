@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TubeWatch - Video de Combotage MCPE</title>
+<style>
+/* Reset e estilo geral */
+* { margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif; }
+body { background:#121212; color:#fff; }
+
+/* Loader */
+#loader {
+    position: fixed;
+    width:100%;
+    height:100%;
+    background:#121212;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+    display:none;
+}
+.spinner {
+    border:6px solid #1E1E1E;
+    border-top:6px solid #FF0000;
+    border-radius:50%;
+    width:60px;
+    height:60px;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin { 0%{transform:rotate(0deg);} 100%{transform:rotate(360deg);} }
+
+header { background:#1E1E1E; padding:20px; text-align:center; position:sticky; top:0; z-index:10; }
+header h1 { color:#FF0000; font-size:2em; }
+
+main { max-width:1000px; margin:20px auto; padding:0 20px; }
+
+.video-container { position:relative; width:100%; max-width:800px; margin:0 auto; }
+video { width:100%; border-radius:10px; }
+
+.video-info { margin-top:15px; }
+.video-info h2 { margin:5px 0; color:#fff; }
+.video-info .date { color:#bbb; font-size:0.9em; }
+.video-info .description { margin-top:10px; line-height:1.5em; color:#ddd; }
+
+.actions { margin-top:10px; display:flex; gap:15px; }
+.actions button {
+    background:#1E1E1E; border:none; padding:8px 15px; border-radius:5px; color:#fff; cursor:pointer; transition:0.2s;
+}
+.actions button.active { background:#FF0000; color:#fff; }
+.actions button:hover { background:#FF0000; }
+
+.comments { margin-top:30px; }
+.comments h3 { margin-bottom:10px; }
+.comment { background:#1E1E1E; padding:10px; border-radius:8px; margin-bottom:10px; }
+.comment .author { font-weight:bold; color:#FF0000; }
+.comment .text { margin-top:5px; color:#ddd; }
+
+.back { display:inline-block; margin-bottom:20px; color:#FF0000; font-weight:bold; cursor:pointer; }
+
+#shareBox {
+    display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%);
+    background:#1E1E1E; padding:20px; border-radius:10px; text-align:center; z-index:1000;
+}
+#shareBox input {
+    width:80%; padding:8px; margin-top:10px; border-radius:5px; border:none; background:#121212; color:#fff;
+}
+#shareBox button {
+    margin-top:10px; padding:5px 15px; border:none; border-radius:5px; background:#FF0000; color:#fff; cursor:pointer;
+}
+
+@media(max-width:600px){
+    main { padding:0 10px; }
+    .actions { flex-direction:column; gap:10px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Loader -->
+<div id="loader"><div class="spinner"></div></div>
+
+<header><h1>TubeWatch</h1></header>
+
+<main>
+    <div class="back" onclick="window.location.href='../../index.html'">← Voltar</div>
+
+    <div class="video-container">
+        <video controls>
+            <source src="../../media/meu-video.mp4" type="video/mp4">
+            Seu navegador não suporta vídeo.
+        </video>
+    </div>
+
+    <div class="video-info">
+        <h2>Video de Combotage MCPE</h2>
+        <div class="date">Postado em: 10/09/2025</div>
+        <div class="description">Apenas um vídeo simples galera</div>
+
+        <div class="actions">
+            <button id="likeBtn">👍 Like</button>
+            <button id="dislikeBtn">👎 Dislike</button>
+            <button id="shareBtn">🔗 Share</button>
+        </div>
+    </div>
+
+    <div class="comments">
+        <h3>Comentários</h3>
+        <div class="comment"><div class="author">PixelGamer</div><div class="text">Show de bola, adorei!</div></div>
+        <div class="comment"><div class="author">CraftMaster</div><div class="text">Muito bom, quero ver mais vídeos assim.</div></div>
+        <div class="comment"><div class="author">MCProPlayer</div><div class="text">Haha, sensacional!</div></div>
+        <div class="comment"><div class="author">BlockBuilder</div><div class="text">Simples e divertido, gostei!</div></div>
+    </div>
+</main>
+
+<!-- Share Box -->
+<div id="shareBox">
+    <p>Copie o link do vídeo:</p>
+    <input type="text" id="videoLink" value="https://SEU-USERNAME.github.io/TubeWatch/videos/video1/" readonly>
+    <br>
+    <button onclick="closeShare()">Fechar</button>
+</div>
+
+<script>
+// Like / Dislike
+const likeBtn = document.getElementById('likeBtn');
+const dislikeBtn = document.getElementById('dislikeBtn');
+
+likeBtn.addEventListener('click', () => { likeBtn.classList.add('active'); dislikeBtn.classList.remove('active'); });
+dislikeBtn.addEventListener('click', () => { dislikeBtn.classList.add('active'); likeBtn.classList.remove('active'); });
+
+// Share
+const shareBtn = document.getElementById('shareBtn');
+const shareBox = document.getElementById('shareBox');
+const loader = document.getElementById('loader');
+
+shareBtn.addEventListener('click', () => {
+    loader.style.display = 'flex';
+    setTimeout(() => {
+        loader.style.display = 'none';
+        shareBox.style.display = 'block';
+        document.getElementById('videoLink').select();
+        document.execCommand('copy');
+        alert('Link copiado para a área de transferência!');
+    },1500);
+});
+
+function closeShare(){ shareBox.style.display='none'; }
+</script>
+
+</body>
+  </html>
