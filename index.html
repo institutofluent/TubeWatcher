@@ -3,54 +3,103 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TubeWatch - Meu Vídeo</title>
+<title>TubeWatch - Video de Combotage MCPE</title>
 <style>
-    /* Reset e fontes */
-    body, html { margin:0; padding:0; font-family: Arial, sans-serif; background:#121212; color:#fff; }
-    a { color:#FF0000; text-decoration:none; }
-    a:hover { text-decoration:underline; }
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif; }
 
-    /* Header */
-    header { background:#1E1E1E; padding:20px; text-align:center; }
-    header h1 { margin:0; color:#FF0000; font-size:2em; }
+    body { background:#121212; color:#fff; }
 
-    /* Container principal */
-    main { max-width: 1000px; margin:20px auto; padding:0 20px; }
+    /* Loading Screen */
+    #loader {
+        position: fixed;
+        width:100%;
+        height:100%;
+        background:#121212;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        z-index:9999;
+    }
+    .spinner {
+        border: 6px solid #1E1E1E;
+        border-top: 6px solid #FF0000;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+        0% { transform: rotate(0deg);}
+        100% { transform: rotate(360deg);}
+    }
 
-    /* Player de vídeo */
+    header { background:#1E1E1E; padding:20px; text-align:center; position:sticky; top:0; z-index:10; }
+    header h1 { color:#FF0000; font-size:2em; }
+
+    main { max-width:1000px; margin:20px auto; padding:0 20px; }
+
+    /* Video Section */
     .video-container { position: relative; width:100%; max-width:800px; margin:0 auto; }
     video { width:100%; border-radius:10px; }
 
-    /* Informações do vídeo */
     .video-info { margin-top:15px; }
     .video-info h2 { margin:5px 0; color:#fff; }
     .video-info .date { color:#bbb; font-size:0.9em; }
     .video-info .description { margin-top:10px; line-height:1.5em; color:#ddd; }
 
-    /* Seção de comentários */
+    /* Action Buttons */
+    .actions { margin-top:10px; display:flex; gap:15px; }
+    .actions button {
+        background:#1E1E1E;
+        border:none;
+        padding:8px 15px;
+        border-radius:5px;
+        color:#fff;
+        cursor:pointer;
+        transition:0.2s;
+    }
+    .actions button:hover { background:#FF0000; }
+
+    /* Comments */
     .comments { margin-top:30px; }
     .comments h3 { margin-bottom:10px; }
     .comment { background:#1E1E1E; padding:10px; border-radius:8px; margin-bottom:10px; }
     .comment .author { font-weight:bold; color:#FF0000; }
     .comment .text { margin-top:5px; color:#ddd; }
 
-    /* Botão voltar */
-    .back { display:inline-block; margin-bottom:20px; color:#FF0000; font-weight:bold; }
+    /* Back button */
+    .back { display:inline-block; margin-bottom:20px; color:#FF0000; font-weight:bold; cursor:pointer; }
+
+    /* Thumbnail gallery (para futuro) */
+    .gallery { display:flex; flex-wrap:wrap; gap:15px; justify-content:center; margin-top:20px; }
+    .video-card { background:#1E1E1E; border-radius:10px; overflow:hidden; width:220px; cursor:pointer; transition: transform 0.2s; }
+    .video-card:hover { transform: scale(1.05); }
+    .video-card img { width:100%; display:block; }
+    .video-card .info { padding:8px; }
+    .video-card .info .title { font-size:1em; color:#fff; margin-bottom:3px; }
+    .video-card .info .date { font-size:0.8em; color:#bbb; }
 
     /* Responsivo */
     @media(max-width:600px){
         main { padding:0 10px; }
+        .actions { flex-direction:column; gap:10px; }
     }
 </style>
 </head>
 <body>
+
+<!-- Loader -->
+<div id="loader">
+    <div class="spinner"></div>
+</div>
 
 <header>
     <h1>TubeWatch</h1>
 </header>
 
 <main>
-    <a href="index.html" class="back">← Voltar para a galeria</a>
+    <div class="back" onclick="window.scrollTo({top:0, behavior:'smooth'})">← Voltar para o topo</div>
 
     <div class="video-container">
         <video controls>
@@ -60,29 +109,56 @@
     </div>
 
     <div class="video-info">
-        <h2>Meu Vídeo Incrível</h2>
+        <h2>Video de Combotage MCPE</h2>
         <div class="date">Postado em: 10/09/2025</div>
-        <div class="description">
-            Esta é a descrição do vídeo. Você pode colocar qualquer texto aqui, como informações sobre o conteúdo, links, ou observações que quiser destacar.
+        <div class="description">Apenas um vídeo simples galera</div>
+
+        <div class="actions">
+            <button>👍 Like</button>
+            <button>👎 Dislike</button>
+            <button>🔗 Share</button>
         </div>
     </div>
 
     <div class="comments">
         <h3>Comentários</h3>
         <div class="comment">
-            <div class="author">Usuário1</div>
-            <div class="text">Vídeo muito bom! Amei o conteúdo.</div>
+            <div class="author">PixelGamer</div>
+            <div class="text">Show de bola, adorei!</div>
         </div>
         <div class="comment">
-            <div class="author">Usuário2</div>
-            <div class="text">Excelente explicação, recomendo para todos!</div>
+            <div class="author">CraftMaster</div>
+            <div class="text">Muito bom, quero ver mais vídeos assim.</div>
         </div>
         <div class="comment">
-            <div class="author">Usuário3</div>
-            <div class="text">Mal posso esperar pelos próximos vídeos!</div>
+            <div class="author">MCProPlayer</div>
+            <div class="text">Haha, sensacional!</div>
+        </div>
+        <div class="comment">
+            <div class="author">BlockBuilder</div>
+            <div class="text">Simples e divertido, gostei!</div>
         </div>
     </div>
+
+    <!-- Miniatura futura (galeria) -->
+    <div class="gallery">
+        <div class="video-card" onclick="alert('Clique no vídeo para abrir a página dedicada')">
+            <img src="thumbnail.jpg" alt="Vídeo 1">
+            <div class="info">
+                <div class="title">Video de Combotage MCPE</div>
+                <div class="date">Postado em: 10/09/2025</div>
+            </div>
+        </div>
+    </div>
+
 </main>
+
+<script>
+    // Loader
+    window.addEventListener('load', function(){
+        document.getElementById('loader').style.display = 'none';
+    });
+</script>
 
 </body>
 </html>
