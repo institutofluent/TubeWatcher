@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TubeWatch - Meu Vídeo</title>
+<style>
+    /* Reset e fontes */
+    body, html { margin:0; padding:0; font-family: Arial, sans-serif; background:#121212; color:#fff; }
+    a { color:#FF0000; text-decoration:none; }
+    a:hover { text-decoration:underline; }
+
+    /* Header */
+    header { background:#1E1E1E; padding:20px; text-align:center; }
+    header h1 { margin:0; color:#FF0000; font-size:2em; }
+
+    /* Container principal */
+    main { max-width: 1000px; margin:20px auto; padding:0 20px; }
+
+    /* Player de vídeo */
+    .video-container { position: relative; width:100%; max-width:800px; margin:0 auto; }
+    video { width:100%; border-radius:10px; }
+
+    /* Informações do vídeo */
+    .video-info { margin-top:15px; }
+    .video-info h2 { margin:5px 0; color:#fff; }
+    .video-info .date { color:#bbb; font-size:0.9em; }
+    .video-info .description { margin-top:10px; line-height:1.5em; color:#ddd; }
+
+    /* Seção de comentários */
+    .comments { margin-top:30px; }
+    .comments h3 { margin-bottom:10px; }
+    .comment { background:#1E1E1E; padding:10px; border-radius:8px; margin-bottom:10px; }
+    .comment .author { font-weight:bold; color:#FF0000; }
+    .comment .text { margin-top:5px; color:#ddd; }
+
+    /* Botão voltar */
+    .back { display:inline-block; margin-bottom:20px; color:#FF0000; font-weight:bold; }
+
+    /* Responsivo */
+    @media(max-width:600px){
+        main { padding:0 10px; }
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>TubeWatch</h1>
+</header>
+
+<main>
+    <a href="index.html" class="back">← Voltar para a galeria</a>
+
+    <div class="video-container">
+        <video controls>
+            <source src="meu-video.mp4" type="video/mp4">
+            Seu navegador não suporta vídeo.
+        </video>
+    </div>
+
+    <div class="video-info">
+        <h2>Meu Vídeo Incrível</h2>
+        <div class="date">Postado em: 10/09/2025</div>
+        <div class="description">
+            Esta é a descrição do vídeo. Você pode colocar qualquer texto aqui, como informações sobre o conteúdo, links, ou observações que quiser destacar.
+        </div>
+    </div>
+
+    <div class="comments">
+        <h3>Comentários</h3>
+        <div class="comment">
+            <div class="author">Usuário1</div>
+            <div class="text">Vídeo muito bom! Amei o conteúdo.</div>
+        </div>
+        <div class="comment">
+            <div class="author">Usuário2</div>
+            <div class="text">Excelente explicação, recomendo para todos!</div>
+        </div>
+        <div class="comment">
+            <div class="author">Usuário3</div>
+            <div class="text">Mal posso esperar pelos próximos vídeos!</div>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>
