@@ -1,3 +1,0 @@
-hello.
-
-the secret is in inside src folder.
