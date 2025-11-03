@@ -10,7 +10,7 @@
 
     body { background:#121212; color:#fff; }
 
-    /* Loading Screen */
+    /* Loader */
     #loader {
         position: fixed;
         width:100%;
@@ -20,6 +20,7 @@
         justify-content:center;
         align-items:center;
         z-index:9999;
+        display:none; /* Começa escondido */
     }
     .spinner {
         border: 6px solid #1E1E1E;
@@ -59,6 +60,7 @@
         cursor:pointer;
         transition:0.2s;
     }
+    .actions button.active { background:#FF0000; color:#fff; }
     .actions button:hover { background:#FF0000; }
 
     /* Comments */
@@ -71,16 +73,37 @@
     /* Back button */
     .back { display:inline-block; margin-bottom:20px; color:#FF0000; font-weight:bold; cursor:pointer; }
 
-    /* Thumbnail gallery (para futuro) */
-    .gallery { display:flex; flex-wrap:wrap; gap:15px; justify-content:center; margin-top:20px; }
-    .video-card { background:#1E1E1E; border-radius:10px; overflow:hidden; width:220px; cursor:pointer; transition: transform 0.2s; }
-    .video-card:hover { transform: scale(1.05); }
-    .video-card img { width:100%; display:block; }
-    .video-card .info { padding:8px; }
-    .video-card .info .title { font-size:1em; color:#fff; margin-bottom:3px; }
-    .video-card .info .date { font-size:0.8em; color:#bbb; }
+    /* Share Box */
+    #shareBox {
+        display:none;
+        position:fixed;
+        top:50%; left:50%;
+        transform:translate(-50%, -50%);
+        background:#1E1E1E;
+        padding:20px;
+        border-radius:10px;
+        text-align:center;
+        z-index:1000;
+    }
+    #shareBox input {
+        width:80%;
+        padding:8px;
+        margin-top:10px;
+        border-radius:5px;
+        border:none;
+        background:#121212;
+        color:#fff;
+    }
+    #shareBox button {
+        margin-top:10px;
+        padding:5px 15px;
+        border:none;
+        border-radius:5px;
+        background:#FF0000;
+        color:#fff;
+        cursor:pointer;
+    }
 
-    /* Responsivo */
     @media(max-width:600px){
         main { padding:0 10px; }
         .actions { flex-direction:column; gap:10px; }
@@ -114,9 +137,9 @@
         <div class="description">Apenas um vídeo simples galera</div>
 
         <div class="actions">
-            <button>👍 Like</button>
-            <button>👎 Dislike</button>
-            <button>🔗 Share</button>
+            <button id="likeBtn">👍 Like</button>
+            <button id="dislikeBtn">👎 Dislike</button>
+            <button id="shareBtn">🔗 Share</button>
         </div>
     </div>
 
@@ -139,25 +162,55 @@
             <div class="text">Simples e divertido, gostei!</div>
         </div>
     </div>
-
-    <!-- Miniatura futura (galeria) -->
-    <div class="gallery">
-        <div class="video-card" onclick="alert('Clique no vídeo para abrir a página dedicada')">
-            <img src="thumbnail.jpg" alt="Vídeo 1">
-            <div class="info">
-                <div class="title">Video de Combotage MCPE</div>
-                <div class="date">Postado em: 10/09/2025</div>
-            </div>
-        </div>
-    </div>
-
 </main>
 
+<!-- Share Box -->
+<div id="shareBox">
+    <p>Copie o link do vídeo:</p>
+    <input type="text" id="videoLink" value="https://seu-site.github.io/meu-video.mp4" readonly>
+    <br>
+    <button onclick="closeShare()">Fechar</button>
+</div>
+
 <script>
-    // Loader
+    // Loader de página principal
     window.addEventListener('load', function(){
-        document.getElementById('loader').style.display = 'none';
+        // Nada a fazer aqui, loader é usado no share
     });
+
+    // Botões Like e Dislike
+    const likeBtn = document.getElementById('likeBtn');
+    const dislikeBtn = document.getElementById('dislikeBtn');
+
+    likeBtn.addEventListener('click', () => {
+        likeBtn.classList.add('active');
+        dislikeBtn.classList.remove('active');
+    });
+
+    dislikeBtn.addEventListener('click', () => {
+        dislikeBtn.classList.add('active');
+        likeBtn.classList.remove('active');
+    });
+
+    // Share
+    const shareBtn = document.getElementById('shareBtn');
+    const shareBox = document.getElementById('shareBox');
+    const loader = document.getElementById('loader');
+
+    shareBtn.addEventListener('click', () => {
+        loader.style.display = 'flex'; // mostra loader
+        setTimeout(() => {
+            loader.style.display = 'none'; // esconde loader
+            shareBox.style.display = 'block'; // mostra caixa de share
+            document.getElementById('videoLink').select();
+            document.execCommand('copy'); // copia automaticamente
+            alert('Link copiado para a área de transferência!');
+        }, 1500); // 1,5 segundos de loader
+    });
+
+    function closeShare() {
+        shareBox.style.display = 'none';
+    }
 </script>
 
 </body>
